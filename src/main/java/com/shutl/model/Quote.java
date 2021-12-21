@@ -64,4 +64,24 @@ public class Quote {
     public void setVehicle(String vehicle) {
         this.vehicle = vehicle;
     }
+
+    public double retrieveMarkup() {
+        if(vehicle == null){
+            return 0;
+        }
+        switch (vehicle) {
+            case "bicycle":
+                return 0.10;
+            case "motorbike":
+                return 0.15;
+            case "parcel_car":
+                return 0.20;
+            case "small_van":
+                return 0.30;
+            case "large_van":
+                return 0.40;
+            default:
+                return 0;
+        }
+    }
 }

@@ -36,7 +36,7 @@ public class QuoteControllerFunctionalTest {
     }
 
     @Test
-    public void testBasicService() throws Exception {
+    public void testBasicServiceNoVehicle() throws Exception {
         Quote quoteData = new Quote("SW1A1AA", "EC2A3LT");
         MvcResult result = this.mockMvc.perform(post("/quote")
                 .contentType("application/json")
