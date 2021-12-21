@@ -12,8 +12,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class QuoteController {
 
     @RequestMapping(value = "/quote", method = POST)
-    public @ResponseBody Quote quote(@RequestBody Quote quote) {
-        Long price = Math.abs((Long.valueOf(quote.getDeliveryPostcode(), 36) - Long.valueOf(quote.getPickupPostcode(), 36))/100000000);
+    public @ResponseBody
+    Quote quote(@RequestBody Quote quote) {
+        Long price = Math.abs((Long.valueOf(quote.getDeliveryPostcode(), 36) - Long.valueOf(quote.getPickupPostcode(), 36)) / 100000000);
 
         return new Quote(quote.getPickupPostcode(), quote.getDeliveryPostcode(), price);
     }
