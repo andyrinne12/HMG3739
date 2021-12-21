@@ -24,10 +24,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @SpringApplicationConfiguration(classes = Application.class)
 public class QuoteControllerFunctionalTest {
 
-    @Autowired private WebApplicationContext webApplicationContext;
-
     ObjectMapper objectMapper = new ObjectMapper();
-
+    @Autowired
+    private WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
 
     @Before
@@ -39,10 +38,10 @@ public class QuoteControllerFunctionalTest {
     public void testBasicServiceNoVehicle() throws Exception {
         Quote quoteData = new Quote("SW1A1AA", "EC2A3LT");
         MvcResult result = this.mockMvc.perform(post("/quote")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(quoteData)))
-            .andExpect(status().isOk())
-            .andReturn();
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(quoteData)))
+                .andExpect(status().isOk())
+                .andReturn();
 
         Quote quote = objectMapper.readValue(result.getResponse().getContentAsString(), Quote.class);
         assertEquals(quote.getPickupPostcode(), "SW1A1AA");
@@ -54,10 +53,10 @@ public class QuoteControllerFunctionalTest {
     public void testVariablePricingByDistance() throws Exception {
         Quote quoteData = new Quote("SW1A1AA", "EC2A3LT");
         MvcResult result = this.mockMvc.perform(post("/quote")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(quoteData)))
-            .andExpect(status().isOk())
-            .andReturn();
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(quoteData)))
+                .andExpect(status().isOk())
+                .andReturn();
 
         Quote quote = objectMapper.readValue(result.getResponse().getContentAsString(), Quote.class);
         assertEquals(quote.getPickupPostcode(), "SW1A1AA");
@@ -66,10 +65,10 @@ public class QuoteControllerFunctionalTest {
 
         quoteData = new Quote("AL15WD", "EC2A3LT");
         result = this.mockMvc.perform(post("/quote")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(quoteData)))
-            .andExpect(status().isOk())
-            .andReturn();
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(quoteData)))
+                .andExpect(status().isOk())
+                .andReturn();
 
         quote = objectMapper.readValue(result.getResponse().getContentAsString(), Quote.class);
         assertEquals(quote.getPickupPostcode(), "AL15WD");
@@ -91,5 +90,34 @@ public class QuoteControllerFunctionalTest {
         assertEquals(quote.getDeliveryPostcode(), "EC2A3LT");
         assertEquals(quote.getVehicle(), "bicycle");
         assertEquals(quote.getPrice(), new Long(348));
+    }
+
+    @Test
+    public void testVariablePricingByVehicle() throws Exception {
+        Quote quoteData = new Quote("SW1A1AA", "EC2A3LT", "bicycle");
+        MvcResult result = this.mockMvc.perform(post("/quote")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(quoteData)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        Quote quote = objectMapper.readValue(result.getResponse().getContentAsString(), Quote.class);
+        assertEquals(quote.getPickupPostcode(), "SW1A1AA");
+        assertEquals(quote.getDeliveryPostcode(), "EC2A3LT");
+        assertEquals(quote.getVehicle(), "bicycle");
+        assertEquals(quote.getPrice(), new Long(348));
+
+        quoteData = new Quote("SW1A1AA", "EC2A3LT", "parcel_car");
+        result = this.mockMvc.perform(post("/quote")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(quoteData)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        quote = objectMapper.readValue(result.getResponse().getContentAsString(), Quote.class);
+        assertEquals(quote.getPickupPostcode(), "SW1A1AA");
+        assertEquals(quote.getDeliveryPostcode(), "EC2A3LT");
+        assertEquals(quote.getVehicle(), "parcel_car");
+        assertEquals(quote.getPrice(), new Long(379));
     }
 }
