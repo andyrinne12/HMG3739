@@ -76,4 +76,20 @@ public class QuoteControllerFunctionalTest {
         assertEquals(quote.getDeliveryPostcode(), "EC2A3LT");
         assertEquals(quote.getPrice(), new Long(305));
     }
+
+    @Test
+    public void testMarkupAddedBicycle() throws Exception {
+        Quote quoteData = new Quote("SW1A1AA", "EC2A3LT", "bicycle");
+        MvcResult result = this.mockMvc.perform(post("/quote")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(quoteData)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        Quote quote = objectMapper.readValue(result.getResponse().getContentAsString(), Quote.class);
+        assertEquals(quote.getPickupPostcode(), "SW1A1AA");
+        assertEquals(quote.getDeliveryPostcode(), "EC2A3LT");
+        assertEquals(quote.getVehicle(), "bicycle");
+        assertEquals(quote.getPrice(), new Long(348));
+    }
 }
