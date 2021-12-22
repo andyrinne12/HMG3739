@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta name="Andre-Oliviu Sologon" />
+    <title> E-Bay Pricing Calculator</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>E-Bay Pricing Calculator</h2>
+        <p>Enter the pickup and destination postcodes along with the vehicle below in order to calculate the delivery
+            price.</p>
+
+        <form id="quote_form">
+            <label for="pickup_postcode">Pickup Postcode:</label><br>
+            <input type="text" id="pickup_postcode" name="pickup_postcode" value=""><br>
+            <label for="destination_postcode">Destination Postcode:</label><br>
+            <input type="text" id="destination_postcode" name="destination_postcode" value=""><br>
+            <label for="vehicle">Vehicle:</label><br>
+            <select name="vehicle" id="vehicle">
+                <option value="bicycle">Bicycle</option>
+                <option value="motorbike">Motorbike</option>
+                <option value="parcel_car">Parcel Car</option>
+                <option value="small_van">Small Van</option>
+                <option value="large_van">Large Van</option>
+            </select><br>
+        </form>
+        <button type="button" class="btn" form="quote_form" onclick="getPrice()">Calculate</button>
+
+        <p id="price" style="display: none">Price: 0</p>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="functions.js"></script>
+
+</html>

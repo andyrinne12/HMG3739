@@ -1,10 +1,7 @@
 package com.shutl.controller;
 
 import com.shutl.model.Quote;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -12,6 +9,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class QuoteController {
 
     @RequestMapping(value = "/quote", method = POST)
+    @CrossOrigin(origins = "*")
     public @ResponseBody
     Quote quote(@RequestBody Quote quote) {
         Long price = Math.round(Math.abs((Long.valueOf(quote.getDeliveryPostcode(), 36) - Long.valueOf(quote.getPickupPostcode(), 36)) / 100000000) * (1 + quote.retrieveMarkup()));

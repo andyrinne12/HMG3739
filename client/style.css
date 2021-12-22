@@ -1,0 +1,59 @@
+body {
+  padding: 10px;
+  padding-top: 0px;
+}
+
+.container {
+  /* border-radius: 20px;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid; */
+
+  padding: 10px;
+}
+
+select {
+  font-size: 15px;
+}
+
+.btn {
+  margin-top: 20px;
+}
+
+#price {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  form {
+    text-align: center !important;
+  }
+
+  input {
+    text-align: center;
+  }
+
+  label {
+    text-align: center;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .container {
+    width: 50%;
+  }
+
+  form {
+    text-align: left;
+  }
+}
