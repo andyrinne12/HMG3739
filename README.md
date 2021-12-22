@@ -1,3 +1,9 @@
+## ReadMe
+
+For some reason, I have not been able to run Srping Boot with Java 11 and Gradle 7.0, so I downgraded to Java 1.8 and Gradle 5.4.1.
+
+In order to test both the API and the UI, run the API using `gradle bootRun` and then open `client/index.html` on the same machine using your preferred browser.
+
 # Take home exercise
 
 **Do NOT fork this repo! Please read the instructions carefully and follow the instructions for submitting your work below.**
